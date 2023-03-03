@@ -2,7 +2,23 @@
 title: "P8106 Data Science II Homework 2: Predicting Out-of-State Tuition Costs"
 author: "Sarah Forrest - sef2183"
 date: "3/8/2023"
-output: github_document
+output: 
+  pdf_document:
+    toc: yes
+    toc_depth: 2
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_depth: '2'
+header-includes:
+- \usepackage{fancyhdr}
+- \usepackage{lipsum}
+- \pagestyle{fancy}
+- \fancyhead[R]{\thepage}
+- \fancypagestyle{plain}{\pagestyle{fancy}}
+--- 
+
+\newpage
 ---
 
 ```{r, include = FALSE, message=FALSE, warning=FALSE}
@@ -20,9 +36,7 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 
 # Data
 
-In this exercise, we build nonlinear models using the “College” data. The dataset
-contains statistics for 565 US Colleges from a previous issue of US News and World Report.
-The response variable is the out-of-state tuition (Outstate). 
+In this exercise, we build nonlinear models using the “College” data. The dataset contains statistics for 565 US Colleges from a previous issue of US News and World Report. The response variable is the out-of-state tuition (Outstate). 
 
 ```{r}
 # read in test data
@@ -170,8 +184,6 @@ The plot of the smoothing spline fit for the df obtained by generalized cross-va
 
 # (b) Fit a generalized additive model (GAM) using all the predictors.
 
-[USE SELECT OR NO??]
-
 Using the caret package and the training dataset:
 
 ```{r}
@@ -256,6 +268,7 @@ plot(gam.m1)
 ```
 
 Bivariate plot for the arbitrarily chosen `Apps` and `Accept` predictor variables: 
+
 ```{r}
 vis.gam(gam.m1, view = c("Apps", "Accept"),
 color = "topo")
