@@ -327,7 +327,9 @@ The final model is as follows:
 
 Outstate ~ 11990.478727 - 0.7057251(h(Expend-15736)) - 33.9331530(h(79-Grad.Rate)) + 0.4027510(h(Room.Board-4250)) - 1.2922196(h(4250-Room.Board)) - 1.2632483(h(F.Undergrad-1411)) - 88.2417155(h(22-perc.alumni)) + 0.6963456(h(Expend-6874)) + 6674.2643400(CollegeBennington College) - 243.6619045(CollegeSpelman College) - 1.5964172(h(1656-Accept)) - 5804.7888985(CollegeCreighton University) - 5741.1315285(CollegeLivingstone College) + 0.2744830 (h(Apps-946)) + 0.9641141(h(F.Undergrad-3128))
 
-## Partial dependence plot of an arbitrary predictor in the final model
+## Partial dependence plots
+
+Plot of a single arbitrary predictor in the final model `perc.alumni`:
 
 ```{r}
 p1 <- pdp::partial(mars.fit, 
@@ -335,6 +337,12 @@ p1 <- pdp::partial(mars.fit,
                    grid.resolution = 10) %>% 
   autoplot()
 
+p1
+```
+
+Plot of an interaction partial dependence plot between arbitrary predictors in the final model `Apps` and `Accept`:
+
+```{r}
 p2 <- pdp::partial(mars.fit, 
                    pred.var = c("Apps", "Accept"),
                    grid.resolution = 10) %>%
@@ -343,8 +351,16 @@ p2 <- pdp::partial(mars.fit,
                    drape = TRUE,
                    screen = list(z = 20, x = -60))
 
+p2
+```
+
+Both partial dependence plots combined:
+
+```{r}
 grid.arrange(p1, p2, ncol = 2)
 ```
+
+The partial dependence plots above allow for better understanding of the relationship between the `perc.alumni`, `Apps`, and `Accept` features and the outcome `Outstate` and the marginal effects of these predictors.
 
 ## Test error
 
